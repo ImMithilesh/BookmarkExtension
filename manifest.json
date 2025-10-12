@@ -1,0 +1,20 @@
+{
+    "manifest_version": 3,
+    "name": "Bookmark Manager",
+    "version": "1.0.0",
+    "description": "Powerful bookmark manager with folder organisation",
+    "permissions": [
+        "bookmarks",
+        "tabs",
+        "storage"
+    ],
+    "action": {
+        "default_popup": "bookmark.html",
+        "icons_default": {
+            "48": "icons/icon48.png"
+        }
+    },
+    "icons": {
+        "48": "icons/icon48.png"
+    }
+}

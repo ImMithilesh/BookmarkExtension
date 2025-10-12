@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8" />
+ <meta name="viewport" content="width=device-width, initial-scale=1" />
+ <title>Edit Bookmarks</title>
+ <link rel="stylesheet" href="bookmark.css" />
+</head>
+<body>
+ <img class="image-gradient" src="gradient.png" alt="gradient" />
+ <div class="layer-blur"></div>
+ <div class="container">
+ <header>
+ <h1 class="logo">BOOKMARK</h1>
+ <nav>
+ <a href="index.html">HOME</a>
+ <a href="add.html">ADD</a>
+ <a href="view.html">VIEW</a>
+ <a href="organize.html">ORGANIZE</a>
+ <a href="import-export.html">IMPORT/EXPORT</a>
+ <a href="delete.html">DELETE</a>
+ </nav>
+ <button class="btn-signing">SIGN IN</button>
+ </header>
+
+ <main>
+ <div class="content">
+ <h1>Edit Bookmarks</h1>
+ <p class="description">Click "Edit" next to any bookmark to update its title or URL.</p>
+ <ul id="bookmarkList"></ul>
+ </div>
+ </main>
+ </div>
+
+ <script>
+ function renderEditableBookmarks() {
+ const list = document.getElementById('bookmarkList');
+ const bookmarks = JSON.parse(localStorage.getItem('bookmarks') || '[]');
+ list.innerHTML = '';
+
+ if (bookmarks.length === 0) {
+ list.innerHTML = '<li>No bookmarks available to edit.</li>';
+ return;
+ }
+
+ bookmarks.forEach((bm, index) => {
+ const li = document.createElement('li');
+ li.innerHTML = `
+ <a href="${bm.url}" target="_blank">${bm.title}</a>
+ <button onclick="editBookmark(${index})">Edit</button>
+ `;
+ list.appendChild(li);
+ });
+ }
+
+ function editBookmark(index) {
+ const bookmarks = JSON.parse(localStorage.getItem('bookmarks') || '[]');
+ const newTitle = prompt("Edit title:", bookmarks[index].title);
+ const newUrl = prompt("Edit URL:", bookmarks[index].url);
+ if (newTitle && newUrl) {
+ bookmarks[index] = { title: newTitle.trim(), url: newUrl.trim() };
+ localStorage.setItem('bookmarks', JSON.stringify(bookmarks));
+ renderEditableBookmarks();
+ }
+ }
+
+ renderEditableBookmarks();
+ </script>
+</body>
+</html>

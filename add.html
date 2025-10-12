@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8" />
+ <meta name="viewport" content="width=device-width, initial-scale=1" />
+ <title>Add Bookmark</title>
+ <link rel="stylesheet" href="bookmark.css" />
+</head>
+<body>
+ <img class="image-gradient" src="gradient.png" alt="gradient" />
+ <div class="layer-blur"></div>
+ <div class="container">
+ <header>
+ <h1 class="logo">BOOKMARK</h1>
+ <nav>
+ <a href="bookmark3p.html">HOME</a>
+ <a href="view.html">VIEW</a>
+ <a href="edit.html">EDIT</a>
+ <a href="organize.html">ORGANIZE</a>
+ <a href="imex.html">IMPORT/EXPORT</a>
+ <a href="delete.html">DELETE</a>
+ </nav>
+ <button class="btn-signing">SIGN IN</button>
+ </header>
+
+ <main>
+ <div class="content">
+ <h1>Add a New Bookmark</h1>
+ <p class="description">Enter the title and URL of the website you'd like to save.</p>
+ <div class="buttons">
+ <input type="text" id="title" placeholder="Bookmark Title" />
+ <input type="url" id="url" placeholder="Bookmark URL" />
+ <button class="btn-signing-main" onclick="handleAdd()">Add Bookmark</button>
+ </div>
+ </div>
+ </main>
+ </div>
+
+ <script>
+ function handleAdd() {
+ const title = document.getElementById('title').value.trim();
+ const url = document.getElementById('url').value.trim();
+ if (title && url) {
+ const bookmarks = JSON.parse(localStorage.getItem('bookmarks') || '[]');
+ bookmarks.push({ title, url });
+ localStorage.setItem('bookmarks', JSON.stringify(bookmarks));
+ alert('Bookmark added!');
+ document.getElementById('title').value = '';
+ document.getElementById('url').value = '';
+ } else {
+ alert('Please enter both title and URL.');
+ }
+ }
+ </script>
+</body>
+</html>
